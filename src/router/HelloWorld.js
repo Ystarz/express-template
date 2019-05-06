@@ -1,6 +1,7 @@
 import express from 'express'
 let router = express.Router()
 import { checkArgs } from '../middleware'
+import { sqlQuery } from '../db/pool'
 
 // 响应 get 请求并返回
 router.get('/hello', (req, res) => {
@@ -15,6 +16,13 @@ router.post('/hello', (req, res) => {
 router.get('/needArgs', checkArgs(['a', 'b', 'c']), (req, res) => {
     let args = req.reqDatas
     res.send(args)
+})
+// 使用了 sqlQuery 进行数据库查询
+router.get('/sqlQuery', checkArgs(['username']), async (req, res) => {
+    let { username } = req.reqDatas
+
+    let resp = await sqlQuery('SELECT password, id FROM member WHERE username = ?;', [ username ])
+    res.send(resp)
 })
 
 export default router
