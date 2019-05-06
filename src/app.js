@@ -3,14 +3,14 @@ let app = express()
 import { startPort } from './config'
 
 // 引入post解析中间件
-let bodyParser = require('body-parser')
-let multer = require('multer')
+import bodyParser from 'body-parser'
+import multer from 'multer'
 let upload = multer()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(upload.array())
 
 // 引入跨域中间件
-let cors = require('cors')
+import cors from 'cors'
 let corsOptions = {
     origin: '*'
 }
