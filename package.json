@@ -1,0 +1,34 @@
+{
+  "name": "express-template",
+  "version": "1.0.0",
+  "description": "express项目模板",
+  "main": "start.js",
+  "scripts": {
+    "start": "nodemon start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HoPGoldy/express-template.git"
+  },
+  "keywords": [
+    "express",
+    "template",
+    "babel",
+    "nodemon"
+  ],
+  "author": "hopgoldy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HoPGoldy/express-template/issues"
+  },
+  "homepage": "https://github.com/HoPGoldy/express-template#readme",
+  "dependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "@babel/runtime": "^7.4.4",
+    "express": "^4.16.4",
+    "nodemon": "^1.19.0"
+  }
+}
