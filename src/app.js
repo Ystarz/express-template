@@ -20,6 +20,10 @@ app.use(cors(corsOptions))
 let morgan = require('morgan')
 app.use(morgan('short'))
 
+// 引入路由
+import setRouter from './router'
+setRouter(app)
+
 // 引入https服务中间件
 // let fs = require('fs')
 // let https = require('https')
@@ -28,10 +32,6 @@ app.use(morgan('short'))
 //     cert: fs.readFileSync('your certificate crt path here', 'utf8')
 // }
 // https.createServer(credentials, app).listen(startPort.https, () => console.log(`start app success at port ${startPort.https} (https)`))
-
-// 引入路由
-import setRouter from './router'
-setRouter(app)
 
 // 引入http服务中间件
 const http = require('http')
