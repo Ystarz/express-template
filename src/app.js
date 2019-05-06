@@ -19,10 +19,19 @@ app.use(cors(corsOptions))
 let morgan = require('morgan')
 app.use(morgan('short'))
 
+// 引入https服务中间件
+// let fs = require('fs')
+// let https = require('https')
+// let credentials = {
+//     key: fs.readFileSync('your certificate key path here', 'utf8'),
+//     cert: fs.readFileSync('your certificate crt path here', 'utf8')
+// }
+// https.createServer(credentials, app).listen(3031, () => console.log('start app success at port 3031 (https)'))
+
 // 引入路由
 import { HelloWorld } from './router'
 app.use('/', HelloWorld)
 
-app.listen(3000, () => {
-    console.log('app start at port 3000')
-})
+// 引入http服务中间件
+const http = require('http')
+http.createServer(app).listen(3000, () => console.log('start app success at port 3000 (http)'))
