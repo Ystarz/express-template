@@ -30,8 +30,8 @@ app.use(morgan('short'))
 // https.createServer(credentials, app).listen(startPort.https, () => console.log(`start app success at port ${startPort.https} (https)`))
 
 // 引入路由
-import { HelloWorld } from './router'
-app.use('/', HelloWorld)
+import setRouter from './router'
+setRouter(app)
 
 // 引入http服务中间件
 const http = require('http')

@@ -1,5 +1,5 @@
 import HelloWorld from './HelloWorld'
 
-export {
-    HelloWorld
+export default (app) => {
+    app.use('/', HelloWorld)
 }
