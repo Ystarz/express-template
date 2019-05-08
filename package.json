@@ -4,7 +4,8 @@
   "description": "express项目模板",
   "main": "start.js",
   "scripts": {
-    "start": "nodemon start.js"
+    "start": "node start.js",
+    "dev": "nodemon start.js"
   },
   "repository": {
     "type": "git",
