@@ -13,13 +13,13 @@ router.post('/hello', (req, res) => {
     res.send(arg)
 })
 // 使用了 checkArgs 中间件来进行参数检查，通过检查后需要的参数会被放在 req.reqDatas 中
-router.get('/needArgs', checkArgs(['a', 'b', 'c']), (req, res) => {
-    let args = req.reqDatas
+router.get('/needArgs', checkArgs('a', 'b', 'c'), (req, res) => {
+    let args = req.query
     res.send(args)
 })
 // 使用了 sqlQuery 进行数据库查询
-router.get('/sqlQuery', checkArgs(['username']), async (req, res) => {
-    let { username } = req.reqDatas
+router.get('/sqlQuery', checkArgs('username'), async (req, res) => {
+    let { username } = req.query
 
     let resp = await sqlQuery('SELECT password, id FROM member WHERE username = ?;', [ username ])
     res.send(resp)

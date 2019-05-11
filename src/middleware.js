@@ -6,7 +6,7 @@
  * 
  * @param {Array} argsName 接口需要的参数名列表
  */
-export function checkArgs(argsName=[]) {
+export function checkArgs(...argsName) {
     return (req, res, next) => {
         // 判断请求类型 获取不同的参数存放对象
         const methodType = Object.keys(req.route.methods)[0]
@@ -29,8 +29,6 @@ export function checkArgs(argsName=[]) {
                 argNotExist = true
                 return
             }
-
-            req.reqDatas[item] = reqDatas[item]
         })
         // 如果没有参数不存在则执行下个中间件
         if (!argNotExist) {

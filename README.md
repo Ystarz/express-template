@@ -20,7 +20,7 @@
 
 **checkArgs 参数检查中间件**
 
-该中间件接受一个数组参数，数组的元素是后续中间件执行所必须的参数名，该中间件会去指定的位置寻找该数组中的参数 (GET请求 > `req.query`, POST请求 > `req.body`)，若请求中包含全部必填参数，该中间件将会把所有收集到的参数存放在 `req.reqDatas` 中。而只要出现参数没有找到，该中间件将会直接返回如下对象：
+该中间件会将接受的所以参数转换成一个字符串数组，数组的元素是后续中间件执行所必须的参数名，该中间件会去指定的位置寻找该数组中的参数 (GET请求 > `req.query`, POST请求 > `req.body`)，若请求中包含全部必填参数，则将正常触发下一个中间件。而只要出现参数没有找到，该中间件将会直接返回如下对象：
 
 ```js
 {
@@ -35,9 +35,9 @@
 // 引入checkArgs
 import { checkArgs } from '../middleware'
 
-// 将中间件插入路由, 该路由需要 username 参数
-router.get('/testRouter', checkArgs([ 'username' ]), (req, res) => {
-    let { username } = req.reqDatas
+// 将中间件插入路由, 该路由需要 username 和 password 参数
+router.get('/testRouter', checkArgs('username', 'password'), (req, res) => {
+    let { username, password } = req.reqDatas
     res.send(username)
 })
 ```
@@ -53,7 +53,7 @@ router.get('/testRouter', checkArgs([ 'username' ]), (req, res) => {
 
 示例用法
 
-请参考 `src/router/HelloWorld` 路由中的 `/sqlQuery` 路由
+请参考 `src/router/HelloWorld` 路由中的 `/sqlQuery` 路由。请注意，直接访问该方法将会出错，请在 `src/config.js` 中正确配置数据库的连接信息 
 
 ## https 集成
 
