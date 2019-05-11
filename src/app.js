@@ -1,6 +1,9 @@
 import express from 'express'
 let app = express()
-import { startPort } from './config'
+
+// 引入swagger
+import setSwagger from './swagger'
+setSwagger(app)
 
 // 引入post解析中间件
 import bodyParser from 'body-parser'
@@ -23,6 +26,9 @@ app.use(morgan('short'))
 // 引入路由
 import setRouter from './router'
 setRouter(app)
+
+// 启用 http 及 https 服务
+import { startPort } from './config'
 
 // 引入https服务中间件
 // let fs = require('fs')
