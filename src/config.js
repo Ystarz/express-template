@@ -15,11 +15,28 @@ export const dbLogin = {
 }
 // swagger配置信息
 export const swaggerConfig = {
-    openapi: '3.0.0',
-    title: 'Express Template',
-    version: '1.0.0',
-    apis: [
+    swaggerDefinition: {
+        info: {
+            title: 'Express Template',
+            description: '这是一个 express 模板',
+            version: '1.0.0',
+        },
+        produces: [
+            "application/json",
+            "application/xml"
+        ],
+        schemes: ['http', 'https'],
+        securityDefinitions: {
+            JWT: {
+                type: 'apiKey',
+                in: 'header',
+                name: 'Authorization',
+                description: '',
+            }
+        }
+    },
+    basedir: __dirname,
+    files: [
         path.join(__dirname, '/router/*.js')
-    ],
-    routerPath: '/api-docs'
+    ]
 }

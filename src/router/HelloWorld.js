@@ -4,32 +4,23 @@ import { checkArgs } from '../middleware'
 import { sqlQuery } from '../db/pool'
 
 /**
- * @swagger
- * /hello:
- *   get:
- *     tags:
- *       - 测试
- *     summary: GET 测试
- *     description: 用于测试基础 GET 请求的接口
- *     responses:
- *       200:
- *         description: 【成功】 返回 world
+ * 用于测试基础 GET 请求的接口
+ * @route GET /hello
+ * @summary GET 测试
+ * @group 测试
+ * @returns {object} 200 - 返回 world
  */
 router.get('/hello', (req, res) => {
     res.send('world')
 })
 
 /**
- * @swagger
- * /hello:
- *   post:
- *     tags:
- *       - 测试
- *     summary: POST 测试
- *     description: 响应 POST 请求并解析 body 中的参数
- *     responses:
- *       200:
- *         description: 【成功】 返回请求 body 中携带的参数
+ * 响应 POST 请求并解析 body 中的参数
+ * @route POST /hello
+ * @summary POST 测试
+ * @param {object} anything.body - 任何参数均可,将会在请求响应中返回
+ * @group 测试
+ * @returns {object} 200 - 【成功】 返回请求 body 中携带的参数
  */
 router.post('/hello', (req, res) => {
     let arg = req.body
@@ -37,16 +28,14 @@ router.post('/hello', (req, res) => {
 })
 
 /**
- * @swagger
- * /needArgs:
- *   get:
- *     tags:
- *       - 测试
- *     summary: 参数检查中间件测试
- *     description: 该接口使用了参数检查中间件，在 query 中携带参数 a, b, c 后即可通过检查，否则返回缺失必填参数
- *     responses:
- *       200:
- *         description: 【成功】 返回请求 body 中携带的参数
+ * 要求必须包含三个指定参数 a, b, c
+ * @route GET /needArgs
+ * @group 测试
+ * @summary 参数检查中间件测试
+ * @param {string} a.query.required - 一个必须传递的参数
+ * @param {string} b.query.required - 一个必须传递的参数
+ * @param {string} c.query.required - 一个必须传递的参数
+ * @returns {object} 200 - 【成功】 返回请求 query 中携带的参数
  */
 router.get('/needArgs', checkArgs('a', 'b', 'c'), (req, res) => {
     let args = req.query
@@ -54,16 +43,12 @@ router.get('/needArgs', checkArgs('a', 'b', 'c'), (req, res) => {
 })
 
 /**
- * @swagger
- * /sqlQuery:
- *   get:
- *     tags:
- *       - 测试
- *     summary: 数据库查询测试
- *     description: 使用了 sqlQuery 进行数据库查询，接受一个 username 来进行查询
- *     responses:
- *       200:
- *         description: 【成功】 返回查询出的 password 和 id
+ * 获取用户名，返回其密码和id，注意！调用该方法请确保正确配置了数据库连接并建有正确的表
+ * @route GET /sqlQuery
+ * @group 测试
+ * @summary 数据库查询测试
+ * @param {string} username.query.required - 用户名
+ * @returns {object} 200 - 【成功】 包含用户的 password 及 id
  */
 router.get('/sqlQuery', checkArgs('username'), async (req, res) => {
     let { username } = req.query
