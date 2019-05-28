@@ -10,6 +10,7 @@ import bodyParser from 'body-parser'
 import multer from 'multer'
 let upload = multer()
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(upload.array())
 
 // 引入跨域中间件
