@@ -1,6 +1,6 @@
 # express-template
 
-自用express项目模板，该项目整合了 babel 和 热更新，引入了 mysql 的数据库查询，并封装了一些主要操作
+自用 express 项目模板，该项目整合了 babel 和 热更新，引入了 mysql 的数据库查询，并封装了一些主要操作
 
 # 需求
 
@@ -20,7 +20,7 @@
 
 **checkArgs 参数检查中间件**
 
-该中间件会将接受的所以参数转换成一个字符串数组，数组的元素是后续中间件执行所必须的参数名，该中间件会去指定的位置寻找该数组中的参数 (GET请求 > `req.query`, POST请求 > `req.body`)，若请求中包含全部必填参数，则将正常触发下一个中间件。而只要出现参数没有找到，该中间件将会直接返回如下对象：
+该中间件会将接受的所有参数转换成一个字符串数组，数组的元素是后续中间件执行所必须的参数名，该中间件会去指定的位置寻找该数组中的参数 (GET请求 > `req.query`, POST请求 > `req.body`)，若请求中包含全部必填参数，则将正常触发下一个中间件。而只要出现参数没有找到，该中间件将会直接返回如下对象：
 
 ```js
 {
@@ -29,7 +29,7 @@
 }
 ```
 
-示例用法（可参考 `src/router/HelloWorld` 路由中的 `/needArgs` 路由）
+示例用法（可参考 `src/router/HelloWorld` 文件中的 `/needArgs` 路由）
 
 ```js
 // 引入checkArgs
@@ -53,7 +53,13 @@ router.get('/testRouter', checkArgs('username', 'password'), (req, res) => {
 
 示例用法
 
-请参考 `src/router/HelloWorld` 路由中的 `/sqlQuery` 路由。请注意，直接访问该方法将会出错，请在 `src/config.js` 中正确配置数据库的连接信息 
+请参考 `src/router/HelloWorld` 文件中的 `/sqlQuery` 路由。请注意，直接访问该方法将会出错，请在 `src/config.js` 中正确配置数据库的连接信息 
+
+## swagger 集成
+
+本项目使用 `express-swagger-generator` 集成了 swagger ，其中集成代码与用法在 `/src/swagger/` 中可以找到，`swagger` 的相关配置存放在 `/src/config.js` 中。 
+
+获取更多信息请访问 [npm - express-swagger-generator](https://www.npmjs.com/package/express-swagger-generator)。
 
 ## https 集成
 
